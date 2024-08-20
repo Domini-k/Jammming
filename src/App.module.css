@@ -1,0 +1,38 @@
+.App {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #020202;
+    color: #FCFCFC;
+
+    /*fonts*/
+    /*Roboto for all regular text*/
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    /*Roboto condensed for headers*/
+    /*font-family: "Roboto Condensed", sans-serif;*/
+    /*font-optical-sizing: auto;*/
+    /*font-weight: <weight>;*/
+    /*font-style: normal;*/
+}
+
+.App > *{
+    border: 1px solid #62C370;
+}
+
+nav {}
+
+header {}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+footer {}
+
+.column1,.column2{
+    border: 1px solid red;
+    flex:1;
+}
