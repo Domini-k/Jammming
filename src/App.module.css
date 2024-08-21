@@ -1,38 +1,88 @@
+body {
+  background-color: #1a1a1a;
+  color: #eeeeee;
+}
 .App {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background-color: #020202;
-    color: #FCFCFC;
+  /* align-items: center; */
+  padding: 0 20px;
+  margin: auto;
 
-    /*fonts*/
-    /*Roboto for all regular text*/
-    font-family: "Roboto", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    /*Roboto condensed for headers*/
-    /*font-family: "Roboto Condensed", sans-serif;*/
-    /*font-optical-sizing: auto;*/
-    /*font-weight: <weight>;*/
-    /*font-style: normal;*/
+  /*fonts*/
+  /*Roboto for all regular text*/
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  /*Roboto condensed for headers*/
+  /*font-family: "Roboto Condensed", sans-serif;*/
+  /*font-optical-sizing: auto;*/
+  /*font-weight: <weight>;*/
+  /*font-style: normal;*/
+}
+nav,
+header,
+main,
+footer {
+  width: 100%;
+  max-width: 1400px;
+  margin: auto;
 }
 
-.App > *{
-    border: 1px solid #62C370;
+.App > *,
+.column1,
+.column2 {
+  /* border: 1px solid red; */
 }
 
-nav {}
+nav {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid #ffdc00;
+  padding: 60px 0;
+  margin-bottom: 60px;
+}
 
-header {}
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px 0 80px 0;
+}
 
 main {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  gap: 20px;
 }
 
-footer {}
+footer {
+  display: flex;
+  border-top: 1px solid #ffdc00;
+  padding: 60px 0;
+  justify-content: center;
+  margin-top: 60px;
+}
 
-.column1,.column2{
-    border: 1px solid red;
-    flex:1;
+.column1,
+.column2 {
+  flex: 1;
+  background-color: #242222;
+  border-radius: 10px;
+  padding: 20px;
+  height: 1000px;
+}
+.logo {
+  max-width: 20%;
+}
+button {
+  background-color: #ffdc00;
+  padding: 20px;
+  border-radius: 20px;
+  max-width: 200px;
+  margin: auto;
+  transition: all 0.1s ease-in;
+}
+button:hover {
+  background-color: #867400;
+  color: #eeeeee;
+  transition: all 0.1s ease-in;
 }

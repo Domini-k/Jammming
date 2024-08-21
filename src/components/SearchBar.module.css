@@ -1,0 +1,9 @@
+.searchQuerryWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.mainSearchQuery {
+  padding: 20px;
+  min-width: 300px;
+}

@@ -1,30 +1,36 @@
 import React from 'react';
 import styles from './App.module.css'
+import SearchBar from './components/SearchBar';
+import SearchResults from './components/SearchResults';
 
 function App() {
     return (
         <div className={styles.App}>
 
             <nav>
-                <h2>logo only in navbar</h2>
-                <img src='#' alt='img'/>
+                <img src='media/logo-no-background.svg' alt='img' className={styles.logo}/>
             </nav>
             <header>
-                <h2>header - search box and search button - search form goes here</h2>
-                <input placeholder='Enter Search query' />
-                <button>Submit search query</button>
+                <SearchBar/>
             </header>
             <main>
                 <div className={styles.column1}>
                     <h2>Column with Search results</h2>
+                    <SearchResults/>
+                    <div>
+                        
+                    </div>
                 </div>
                 <div className={styles.column2}>
-                    <h2>Column with items added by the user with the option to create playlist</h2>
+                    <input placeholder='Name the playlist' />
+                    <div>
+                    <h2>list of items selected</h2>
+                    </div>
                     <button>Save playlist</button>
                 </div>
             </main>
             <footer>
-                <h2>logo only will go here as a footer</h2>
+            <img src='media/logo-no-background.svg' alt='img' className={styles.logo}/>
             </footer>
 
         </div>
