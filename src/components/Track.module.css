@@ -1,0 +1,8 @@
+.searchResultContent {
+  flex-direction: column;
+  background-color: white;
+  display: flex;
+  justify-items: flex-end;
+  gap: 10px;
+  padding: 10px;
+}

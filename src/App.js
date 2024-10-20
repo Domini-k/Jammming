@@ -5,119 +5,134 @@ import SearchResults from "./components/SearchResults";
 import Playlist from "./components/Playlist";
 // =====================================================
 // Mockup values to avoid using API
-const apiResponse = [
-  {
-    name:"Namerson",
-    artist:"Hey Bobby",
-    album:"itsa me",
-    id:"1"
-  },
-  {
-    name:"TestyZesty",
-    artist:"Tom Tomson",
-    album:"Just Me",
-    id:"2"
-  }
-]
 const apiResponse2 = [
   {
     name:"Namerson",
     artist:"Hey Bobby",
     album:"itsa me",
-    id:"1"
-  },
-  {
-    name:"Namerson",
-    artist:"Hey Bobby",
-    album:"itsa me",
-    id:"1"
-  },
-  {
-    name:"Namerson",
-    artist:"Hey Bobby",
-    album:"itsa me",
-    id:"1"
-  },
-  {
-    name:"Namerson",
-    artist:"Hey Bobby",
-    album:"itsa me",
-    id:"1"
-  },
-  {
-    name:"Namerson",
-    artist:"Hey Bobby",
-    album:"itsa me",
-    id:"1"
-  },
-  {
-    name:"Namerson",
-    artist:"Hey Bobby",
-    album:"itsa me",
-    id:"1"
-  },
-  {
-    name:"Namerson",
-    artist:"Hey Bobby",
-    album:"itsa me",
-    id:"1"
-  },
-  {
-    name:"Namerson",
-    artist:"Hey Bobby",
-    album:"itsa me",
-    id:"1"
-  },
-  {
-    name:"Namerson",
-    artist:"Hey Bobby",
-    album:"itsa me",
-    id:"1"
-  },
-  {
-    name:"Namerson",
-    artist:"Hey Bobby",
-    album:"itsa me",
-    id:"1"
-  },
-  {
-    name:"Namerson",
-    artist:"Hey Bobby",
-    album:"itsa me",
-    id:"1"
-  },
-  {
-    name:"Namerson",
-    artist:"Hey Bobby",
-    album:"itsa me",
-    id:"1"
-  },
-  {
-    name:"Namerson",
-    artist:"Hey Bobby",
-    album:"itsa me",
-    id:"1"
+    id:(window.crypto.randomUUID())
   },
   {
     name:"TestyZesty",
     artist:"Tom Tomson",
     album:"Just Me",
-    id:"2"
+    id:(window.crypto.randomUUID())
+  }
+]
+const apiResponse = [
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:(window.crypto.randomUUID())
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:(window.crypto.randomUUID())
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:(window.crypto.randomUUID())
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:(window.crypto.randomUUID())
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:(window.crypto.randomUUID())
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:(window.crypto.randomUUID())
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:(window.crypto.randomUUID())
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:(window.crypto.randomUUID())
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:(window.crypto.randomUUID())
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:(window.crypto.randomUUID())
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:(window.crypto.randomUUID())
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:(window.crypto.randomUUID())
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:(window.crypto.randomUUID())
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:(window.crypto.randomUUID())
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:(window.crypto.randomUUID())
+  },
+  {
+    name:"TestyZesty",
+    artist:"Tom Tomson",
+    album:"Just Me",
+    id:(window.crypto.randomUUID())
   }
 ]
 // =====================================================
 
 function App() {
   const [musicSearchQuery,setMusicSearchQuery] = useState();
-  const [querySearchResults,setQuerySearchResults] = useState([]);
+
+  // const [querySearchResults,setQuerySearchResults] = useState([]);
+
   function getMusicQueryDetailsFromChild(data){
     setMusicSearchQuery(data);
   }
-  useEffect(() => {
-    if(typeof musicSearchQuery === "string"){
-      setQuerySearchResults(apiResponse);
-    }
-  }, [musicSearchQuery]);
+
+  // useEffect(() => {
+  //   if(typeof musicSearchQuery === "string"){
+  //     setQuerySearchResults(apiResponse);
+  //   }
+  // }, [musicSearchQuery]);
 
   //==================================================================
   //==================== RETURN STATEMENT ============================
@@ -134,8 +149,8 @@ function App() {
             <SearchBar sendQueryDataToParent={getMusicQueryDetailsFromChild}/>
 
             <div className={styles.subColLeft}>
-              <h2 className={styles.searchResultsHeader}>Search Results</h2>
-              <SearchResults queryResponse={querySearchResults}/>
+              <h2>Search Results</h2>
+              <SearchResults queryText={musicSearchQuery}/>
             </div>
           </div>
           <div className={styles.colRight}>

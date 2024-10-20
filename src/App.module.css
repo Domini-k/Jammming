@@ -68,9 +68,6 @@ main {
   gap: 20px;
   height: 100%;
 }
-.searchResultsHeader {
-  /* flex: 1; */
-}
 
 .colLeft {
   /* border: 5px solid brown; */
