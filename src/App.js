@@ -3,31 +3,39 @@ import styles from "./App.module.css";
 import SearchBar from "./components/SearchBar";
 import SearchResults from "./components/SearchResults";
 import Playlist from "./components/Playlist";
+// =====================================================
+// Mockup values to avoid using API
+const apiResponse = [
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:"1"
+  },
+  {
+    name:"TestyZesty",
+    artist:"Tom Tomson",
+    album:"Just Me",
+    id:"2"
+  }
+]
+// =====================================================
 
 function App() {
-  const [musicSearchQuery,setMusicSearchQuery] = useState("");
+  const [musicSearchQuery,setMusicSearchQuery] = useState();
   const [querySearchResults,setQuerySearchResults] = useState([]);
-
   function getMusicQueryDetailsFromChild(data){
     setMusicSearchQuery(data);
   }
-
   useEffect(() => {
-    // If there is some querry defined for the spotify search then perform API query
-    if(musicSearchQuery !== ""){
-      // Mockup values to avoid using API
-      const apiResponse = [
-        {
-          name:"",
-          artist:"",
-          album:"",
-          id:""
-        }
-      ]
-      setQuerySearchResults(apiResponse)
+    if(typeof musicSearchQuery === "string"){
+      setQuerySearchResults(apiResponse);
     }
-
   }, [musicSearchQuery]);
+
+  //==================================================================
+  //==================== RETURN STATEMENT ============================
+  //==================================================================
 
     return (
     <div className={styles.App}>
@@ -40,6 +48,7 @@ function App() {
             <SearchBar sendQueryDataToParent={getMusicQueryDetailsFromChild}/>
 
             <div className={styles.subColLeft}>
+              <h2>Search Results</h2>
               <SearchResults queryResponse={querySearchResults}/>
             </div>
           </div>
@@ -50,6 +59,7 @@ function App() {
             />
 
             <div className={styles.subColRight}>
+            <h2>Your Playlist</h2>
                 <Playlist/>
             </div>
           </div>
@@ -61,6 +71,9 @@ function App() {
       </main>
     </div>
   );
+//==================================================================
+//==================== RETURN STATEMENT ============================
+//==================================================================
 }
 
 export default App;
