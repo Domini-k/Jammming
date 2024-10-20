@@ -13,6 +13,26 @@ const apiResponse = [
     id:"1"
   },
   {
+    name:"TestyZesty",
+    artist:"Tom Tomson",
+    album:"Just Me",
+    id:"2"
+  }
+]
+const apiResponse2 = [
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:"1"
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:"1"
+  },
+  {
     name:"Namerson",
     artist:"Hey Bobby",
     album:"itsa me",

@@ -69,7 +69,7 @@ main {
   height: 100%;
 }
 .searchResultsHeader {
-  flex: 1;
+  /* flex: 1; */
 }
 
 .colLeft {
@@ -89,6 +89,7 @@ main {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 .colRight {
   /* border: 5px solid green; */
