@@ -1,7 +1,12 @@
 import React from 'react';
 
 function Playlist() {
-    console.log('Component template')
+    return(
+        <ul>
+        <li>TrackSelectedByUser</li>
+        <li>TrackSelectedByUser</li>
+      </ul>
+    )
 }
 
 export default Playlist
