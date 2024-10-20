@@ -13,6 +13,72 @@ const apiResponse = [
     id:"1"
   },
   {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:"1"
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:"1"
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:"1"
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:"1"
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:"1"
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:"1"
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:"1"
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:"1"
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:"1"
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:"1"
+  },
+  {
+    name:"Namerson",
+    artist:"Hey Bobby",
+    album:"itsa me",
+    id:"1"
+  },
+  {
     name:"TestyZesty",
     artist:"Tom Tomson",
     album:"Just Me",
@@ -48,7 +114,7 @@ function App() {
             <SearchBar sendQueryDataToParent={getMusicQueryDetailsFromChild}/>
 
             <div className={styles.subColLeft}>
-              <h2>Search Results</h2>
+              <h2 className={styles.searchResultsHeader}>Search Results</h2>
               <SearchResults queryResponse={querySearchResults}/>
             </div>
           </div>

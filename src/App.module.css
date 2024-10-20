@@ -4,6 +4,15 @@
   font-style: normal;
   border: 0;
 }
+main,
+.mainWrapper,
+.colLeft,
+.colRight,
+.subColLeft,
+.subColRight,
+.searchResultsWrapper {
+  min-height: 0;
+}
 h1,
 h2,
 h3,
@@ -57,38 +66,48 @@ main {
   /* border: 5px solid darkmagenta; */
   display: flex;
   gap: 20px;
-  height: inherit;
+  height: 100%;
+}
+.searchResultsHeader {
+  flex: 1;
 }
 
 .colLeft {
   /* border: 5px solid brown; */
-  flex: 1;
+  /* flex: 1; */
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 .subColLeft {
   background-color: #e4e4e5;
   /* border: 5px solid goldenrod; */
-  height: 100%;
   border-radius: 5px;
   margin-top: 20px;
   padding: 0 20px;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 .colRight {
   /* border: 5px solid green; */
-  flex: 1;
+  /* flex: 1; */
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 .playlistNameInput {
   padding: 10px;
 }
+
 .subColRight {
   background-color: #e4e4e5;
   /* border: 5px solid yellowgreen; */
-  height: 100%;
   margin-top: 20px;
   border-radius: 5px;
+  height: 100%;
+  overflow: hidden;
 }
 .savePlaylistBtnWrapper {
   display: flex;
