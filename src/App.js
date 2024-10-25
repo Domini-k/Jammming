@@ -145,30 +145,46 @@ function App() {
       </header>
       <main>
         <div className={styles.mainWrapper}>
-          <div className={styles.colLeft}>
+
+          <div className={styles.searchAndPlaylistNameSection}>
             <SearchBar sendQueryDataToParent={getMusicQueryDetailsFromChild}/>
 
-            <div className={styles.subColLeft}>
-              <h2>Search Results</h2>
-              <SearchResults queryText={musicSearchQuery}/>
-            </div>
-          </div>
-          <div className={styles.colRight}>
-            <input
-              placeholder="Playlist name"
-              className={styles.playlistNameInput}
-            />
 
-            <div className={styles.subColRight}>
-            <h2>Your Playlist</h2>
-                <Playlist/>
+
+            <div>
+              <input
+                placeholder="Playlist name"
+                className={styles.playlistNameInput}
+              />
+            </div>
+
+
+
+
+          </div>
+
+          <div className={styles.trackListsSection}>
+            <div className={styles.colLeft}>
+              <div className={styles.subColLeft}>
+                <h2>Search Results</h2>
+                <SearchResults queryText={musicSearchQuery}/>
+              </div>
+            </div>
+            <div className={styles.colRight}>
+              <div className={styles.subColRight}>
+              <h2>Your Playlist</h2>
+                  <Playlist/>
+              </div>
             </div>
           </div>
-        </div>
-        <div className={styles.savePlaylistBtnWrapper}>    
+
+          <div className={styles.savePlaylistBtnWrapper}>    
             <div className={styles.savePlaylistBtnSpacer}></div>
             <button className={styles.savePlaylistBtn}>💾 Save playlist</button>
         </div>
+
+        </div>
+
       </main>
     </div>
   );

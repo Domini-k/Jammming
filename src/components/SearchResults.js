@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Tracklist from './Tracklist'
 import styles from "./SearchResults.module.css";
 // Mockup values to avoid using API for testing purposes
-const apiResponse = [
+const apiResponse2 = [
     {
       name:"Namerson",
       artist:"Hey Bobby",
@@ -16,7 +16,7 @@ const apiResponse = [
       id:(window.crypto.randomUUID())
     }
   ]
-const apiResponse2 = [
+const apiResponse = [
     {
       name:"Namerson",
       artist:"Hey Bobby",

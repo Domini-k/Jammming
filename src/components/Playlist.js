@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Tracklist from './Tracklist'
 import styles from "./Playlist.module.css";
 // Mockup values
-const mockedListOfTracks2 = [
+const mockedListOfTracks = [
     {
       name:"Namerson",
       artist:"Hey Bobby",
@@ -100,7 +100,7 @@ const mockedListOfTracks2 = [
       id:(window.crypto.randomUUID())
     }
   ];
-const mockedListOfTracks = [
+const mockedListOfTracks2 = [
     {
       name:"Namerson",
       artist:"Hey Bobby",

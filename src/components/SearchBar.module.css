@@ -1,6 +1,7 @@
 .searchBarWrapper {
   display: flex;
   gap: 20px;
+  width: 100%;
 }
 .mainSearchQuery {
   flex: 1;
@@ -13,7 +14,7 @@
   font-optical-sizing: auto;
   font-weight: 300;
   font-style: normal;
-  /* font-size: 1.3em; */
+  font-size: 1.3em;
   background-color: #8a8a8d;
   color: white;
   transition: all 0.1s ease-in;
