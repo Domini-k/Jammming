@@ -1,10 +1,10 @@
 .searchBarWrapper {
   display: flex;
+  gap: 20px;
 }
 .mainSearchQuery {
   flex: 1;
   padding: 10px;
-  margin-right: 10px;
 }
 .searchQueryButton {
   flex: 1;
@@ -13,13 +13,12 @@
   font-optical-sizing: auto;
   font-weight: 300;
   font-style: normal;
-  font-size: 1.3em;
+  /* font-size: 1.3em; */
   background-color: #8a8a8d;
   color: white;
   transition: all 0.1s ease-in;
   text-shadow: 1px 1px 4px black;
   border-radius: 5px;
-  margin-left: 10px;
 }
 .searchQueryButton:hover {
   background-color: #b4b4b4;

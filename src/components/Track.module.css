@@ -1,8 +1,35 @@
 .searchResultContent {
-  flex-direction: column;
+  /* flex-direction: column; */
+  justify-content: space-between;
+  align-items: center;
   background-color: white;
   display: flex;
   justify-items: flex-end;
-  gap: 10px;
   padding: 10px;
+}
+
+.trackCardleftCol {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* .trackCardrightCol {
+}
+.trackCardleftCol,
+.trackCardrightCol {
+} */
+
+.addButtonStyling,
+.removeButtonStyling {
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+}
+
+.addButtonStyling {
+  background-color: #27272a;
+}
+.removeButtonStyling {
+  background-color: #de5e5e;
 }
