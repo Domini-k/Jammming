@@ -1,36 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Track from './Track';
 import styles from './Tracklist.module.css'
 
-function Tracklist({listOfTrackObjectsFromResponse,typeOfTracklist}) {
+function Tracklist({
+                       listOfTrackObjectsFromResponse,
+                       typeOfTracklist,
+                       getAddedTrackToPlaylistFromTrackChild,
+                       trackRemovedFromSearchList,
+                       getRemovedTrackFromPlaylistFromTrackChild
+                   }) {
+    const [listOfTrackTagsFromResponse, setlistOfTrackTagsFromResponse] = useState([])
 
-    const [listOfTrackTagsFromResponse,setlistOfTrackTagsFromResponse] = useState([])
 
-    useEffect(()=>{
-        
-//-? Why there is a check for length????
+    useEffect(() => {
+        setlistOfTrackTagsFromResponse(
+            listOfTrackObjectsFromResponse.map(({name, artist, album, id}, key) => {
+                return (
+                    <Track key={key} name={name} artist={artist} album={album} id={id}
+                           typeOfTracklist={typeOfTracklist}
+                           getAddedTrackToPlaylistFromTrackChild={getAddedTrackToPlaylistFromTrackChild}
+                           getRemovedTrackFromPlaylistFromTrackChild={getRemovedTrackFromPlaylistFromTrackChild}/>
+                )
+            })
+        )
+    }, [listOfTrackObjectsFromResponse])
 
-        if(listOfTrackObjectsFromResponse.length>0){
-            setlistOfTrackTagsFromResponse(
-                listOfTrackObjectsFromResponse.map( ({name,artist,album,id},key) => {
-                    return (
-                        <Track key={key} name={name} artist={artist} album={album} id={id} typeOfTracklist={typeOfTracklist}/>
-                    )
-                })
-            )
+
+    useEffect(() => {
+        if (trackRemovedFromSearchList) {
+            setlistOfTrackTagsFromResponse(prevState => prevState.filter(track => track.props.id !== trackRemovedFromSearchList.id))
         }
-    },[listOfTrackObjectsFromResponse])
+    }, [trackRemovedFromSearchList])
 
-    return(
+
+    return (
         <div className={styles.searchResultsWrapper}>
-            {listOfTrackTagsFromResponse.length>0?listOfTrackTagsFromResponse:"..."}
+            {listOfTrackTagsFromResponse.length > 0 ? listOfTrackTagsFromResponse : "..."}
         </div>
     )
-
-
-
-
-
 }
 
 export default Tracklist

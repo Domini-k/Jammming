@@ -1,143 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Tracklist from './Tracklist'
 import styles from "./Playlist.module.css";
-// Mockup values
-const mockedListOfTracks = [
-    {
-      name:"Namerson",
-      artist:"Hey Bobby",
-      album:"itsa me",
-      id:(window.crypto.randomUUID())
-    },
-    {
-      name:"Namerson",
-      artist:"Hey Bobby",
-      album:"itsa me",
-      id:(window.crypto.randomUUID())
-    },
-    {
-      name:"Namerson",
-      artist:"Hey Bobby",
-      album:"itsa me",
-      id:(window.crypto.randomUUID())
-    },
-    {
-      name:"Namerson",
-      artist:"Hey Bobby",
-      album:"itsa me",
-      id:(window.crypto.randomUUID())
-    },
-    {
-      name:"Namerson",
-      artist:"Hey Bobby",
-      album:"itsa me",
-      id:(window.crypto.randomUUID())
-    },
-    {
-      name:"Namerson",
-      artist:"Hey Bobby",
-      album:"itsa me",
-      id:(window.crypto.randomUUID())
-    },
-    {
-      name:"Namerson",
-      artist:"Hey Bobby",
-      album:"itsa me",
-      id:(window.crypto.randomUUID())
-    },
-    {
-      name:"Namerson",
-      artist:"Hey Bobby",
-      album:"itsa me",
-      id:(window.crypto.randomUUID())
-    },
-    {
-      name:"Namerson",
-      artist:"Hey Bobby",
-      album:"itsa me",
-      id:(window.crypto.randomUUID())
-    },
-    {
-      name:"Namerson",
-      artist:"Hey Bobby",
-      album:"itsa me",
-      id:(window.crypto.randomUUID())
-    },
-    {
-      name:"Namerson",
-      artist:"Hey Bobby",
-      album:"itsa me",
-      id:(window.crypto.randomUUID())
-    },
-    {
-      name:"Namerson",
-      artist:"Hey Bobby",
-      album:"itsa me",
-      id:(window.crypto.randomUUID())
-    },
-    {
-      name:"Namerson",
-      artist:"Hey Bobby",
-      album:"itsa me",
-      id:(window.crypto.randomUUID())
-    },
-    {
-      name:"Namerson",
-      artist:"Hey Bobby",
-      album:"itsa me",
-      id:(window.crypto.randomUUID())
-    },
-    {
-      name:"Namerson",
-      artist:"Hey Bobby",
-      album:"itsa me",
-      id:(window.crypto.randomUUID())
-    },
-    {
-      name:"TestyZesty",
-      artist:"Tom Tomson",
-      album:"Just Me",
-      id:(window.crypto.randomUUID())
+
+function Playlist({
+                      addTrackToThePlaylist/*,
+                    getRemovedTrackFromPlaylistFromTrackChild*/
+                  }) {
+
+    const [tracksInPlaylist, setTracksInPlaylist] = useState([])
+    const [playlistName, setPlaylistName] = useState('')
+    const [trackToRemoveFromPlaylist, setTrackToRemoveFromPlaylist] = useState()
+
+    function getRemovedTrackFromPlaylistFromTrackChild(trackToBeRemoved) {
+        setTrackToRemoveFromPlaylist(trackToBeRemoved)
     }
-  ];
-const mockedListOfTracks2 = [
-    {
-      name:"Namerson",
-      artist:"Hey Bobby",
-      album:"itsa me",
-      id:(window.crypto.randomUUID())
-    },
-    {
-      name:"TestyZesty",
-      artist:"Tom Tomson",
-      album:"Just Me",
-      id:(window.crypto.randomUUID())
-    }
-  ]
 
-// =====================================================
-
-function Playlist(newlyAddedTrackToPlaylist) {
-
-  const [tracksInPlaylist,setTracksInPlaylist] = useState([])
-  const [playlistName,setPlaylistName] = useState([])
-
-  useEffect(()=>{
-
-    // Mock list of tracks on the playlist to adjust CSS design
-    setTracksInPlaylist(mockedListOfTracks)
+    useEffect(() => {
+        if (addTrackToThePlaylist) {
+            setTracksInPlaylist(prevListOfTracks => [...prevListOfTracks, addTrackToThePlaylist])
+        }
+    }, [addTrackToThePlaylist])
 
 
-  },[newlyAddedTrackToPlaylist])
+    useEffect(() => {
+        if (trackToRemoveFromPlaylist) {
+            setTracksInPlaylist(prevState => prevState.filter(track => track.id !== trackToRemoveFromPlaylist.id))
+        }
+    }, [trackToRemoveFromPlaylist])
 
-
-
-
-
-
-  return(
-    <Tracklist listOfTrackObjectsFromResponse={tracksInPlaylist} typeOfTracklist="Playlist"/>
-  )
+    return (
+        <Tracklist listOfTrackObjectsFromResponse={tracksInPlaylist} typeOfTracklist="Playlist"
+                   getRemovedTrackFromPlaylistFromTrackChild={getRemovedTrackFromPlaylistFromTrackChild}/>
+    )
 }
 
 export default Playlist
