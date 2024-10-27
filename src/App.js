@@ -4,6 +4,11 @@ import SearchBar from "./components/SearchBar";
 import SearchResults from "./components/SearchResults";
 import Playlist from "./components/Playlist";
 
+/*
+TODO - There is a bug which makes the list not rerender after first render
+TODO To redo this problem user needs to enter search query, click the button, then change the query and click the button.
+*/
+
 function App() {
     const [musicSearchQuery, setMusicSearchQuery] = useState();
     const [trackAddedToPlaylist, setTrackAddedToPlaylist] = useState();
@@ -17,9 +22,6 @@ function App() {
         setTrackAddedToPlaylist(addedTrack)
         setTrackRemovedFromSearchList(addedTrack)
     }
-
-    /*    function getRemovedTrackFromPlaylistFromTrackChild(trackToRemoveFromPlaylist) {
-        }*/
 
 
     //==================================================================
