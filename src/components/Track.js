@@ -9,22 +9,22 @@ function Track({
                    id,
                    typeOfTracklist,
                    getAddedTrackToPlaylistFromTrackChild,
-                   getRemovedTrackFromPlaylistFromTrackChild
+                   getRemovedTrackFromPlaylistFromTrackChild,
+                   uri
                }) {
 
 
     function handleClickAdd() {
-        getAddedTrackToPlaylistFromTrackChild({name, artist, album, id})
+        getAddedTrackToPlaylistFromTrackChild({name, artist, album, id, uri})
     }
 
     function handleClickRemove() {
-        console.log("Clicked remove button")
-        getRemovedTrackFromPlaylistFromTrackChild({name, artist, album, id})
+        getRemovedTrackFromPlaylistFromTrackChild({name, artist, album, id, uri})
     }
 
 
     return (
-        <div className={styles.searchResultContent} album={album} id={id}>
+        <div className={styles.searchResultContent} album={album} id={id} uri={uri}>
             <div className={styles.trackCardleftCol}>
                 <h3>{name}</h3>
                 <p>{artist}</p>

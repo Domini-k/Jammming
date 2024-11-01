@@ -3,16 +3,25 @@ import styles from "./App.module.css";
 import SearchBar from "./components/SearchBar";
 import SearchResults from "./components/SearchResults";
 import Playlist from "./components/Playlist";
+import Switch from "./styledComponents/Switch";
+import UserAccountPlaylists from "./components/UserAccountPlaylists";
 
-/*
-TODO - There is a bug which makes the list not rerender after first render
-TODO To redo this problem user needs to enter search query, click the button, then change the query and click the button.
-*/
+
+//TODO - There is a bug which makes the list not rerender after first render
+// To redo this problem user needs to enter search query, click the button, then change the query and click the button.
+
 
 function App() {
     const [musicSearchQuery, setMusicSearchQuery] = useState();
     const [trackAddedToPlaylist, setTrackAddedToPlaylist] = useState();
     const [trackRemovedFromSearchList, setTrackRemovedFromSearchList] = useState();
+    const [tracksOnUserPlaylist, setTracksOnUserPlaylist] = useState();
+    const [clearPlaylistAndSaveToUserProfile, setClearPlaylistAndSaveToUserProfile] = useState(false);
+    const [userPlaylistsViewerActive, setUserPlaylistsViewerActive] = useState(false);
+
+    function getTracksOnPlaylistFromPlaylistComponent(data) {
+        setTracksOnUserPlaylist(data)
+    }
 
     function getMusicQueryDetailsFromChild(data) {
         setMusicSearchQuery(data);
@@ -23,6 +32,27 @@ function App() {
         setTrackRemovedFromSearchList(addedTrack)
     }
 
+    function handleClick(e) {
+        setClearPlaylistAndSaveToUserProfile(true)
+    }
+
+    function deativateClearPlaylistAndSaveToUserProfileMarker() {
+        setClearPlaylistAndSaveToUserProfile(false)
+    }
+
+    function switchPlaylistView() {
+        setUserPlaylistsViewerActive(prevState => !prevState)
+    }
+
+    useEffect(() => {
+        document.getElementById("playlistViewSwitch").addEventListener('click', switchPlaylistView)
+        return () => {
+            document.getElementById("playlistViewSwitch").removeEventListener('click', switchPlaylistView)
+        }
+    }, [])
+//    document.getElementById("playlistViewSwitch").addEventListener('click', () => {
+//        console.log("Click")
+//    })
 
     //==================================================================
     //==================== RETURN STATEMENT ============================
@@ -44,6 +74,7 @@ function App() {
                             <input
                                 placeholder="Playlist name"
                                 className={styles.playlistNameInput}
+                                id="playlistName"
                             />
                         </div>
 
@@ -61,15 +92,26 @@ function App() {
                         </div>
                         <div className={styles.colRight}>
                             <div className={styles.subColRight}>
-                                <h2>Your Playlist</h2>
-                                <Playlist addTrackToThePlaylist={trackAddedToPlaylist}/>
+                                <div className={styles.rightHeaderWrapper}>
+                                    <h2 className={styles.rightHeader}>Switch view between playlist creator and
+                                        playlists browser</h2>
+                                    <div id="playlistViewSwitch">
+                                        <Switch/>
+                                    </div>
+                                </div>
+                                {userPlaylistsViewerActive ? "userPlaylistsViewerActive" : (
+                                    <Playlist addTrackToThePlaylist={trackAddedToPlaylist}
+                                              sendTrackOnPlaylistToMainComponent={getTracksOnPlaylistFromPlaylistComponent}
+                                              clearPlaylistAndSaveToUserProfile={clearPlaylistAndSaveToUserProfile}
+                                              deativateClearPlaylistAndSaveToUserProfileMarker={deativateClearPlaylistAndSaveToUserProfileMarker}/>)}
+
                             </div>
                         </div>
                     </div>
 
                     <div className={styles.savePlaylistBtnWrapper}>
                         <div className={styles.savePlaylistBtnSpacer}></div>
-                        <button className={styles.savePlaylistBtn}>💾 Save playlist</button>
+                        <button className={styles.savePlaylistBtn} onClick={handleClick}>💾 Save playlist</button>
                     </div>
 
                 </div>

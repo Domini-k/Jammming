@@ -132,10 +132,24 @@ main {
   flex-direction: column;
   flex: 1;
 }
+
+.rightHeaderWrapper {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.rightHeader {
+  /*  flex: 1;*/
+
+}
+
+
 .savePlaylistBtnWrapper {
   display: flex;
   margin-top: 20px;
   gap: 20px;
+  justify-content: space-between;
 }
 .savePlaylistBtnSpacer {
   flex: 1;
