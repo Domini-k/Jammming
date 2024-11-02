@@ -97,6 +97,12 @@ input {
     backdrop-filter: blur(7px);
 }
 
+header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 main {
     /* border: 5px solid darkkhaki; */
     display: flex;

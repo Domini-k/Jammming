@@ -5,6 +5,8 @@ import SearchResults from "./components/SearchResults";
 import PlaylistsManager from "./components/PlaylistsManager";
 import Switch from "./components/styledComponents/Switch";
 import RenameModal from "./components/styledComponents/RenameModal";
+import LoginButton from "./components/styledComponents/LoginButton";
+import {useSpotifyAuth} from './api/useSpotifyAuth';
 
 
 //TODO - There is a bug which makes the list not rerender after first render
@@ -79,7 +81,6 @@ function App() {
         }
     }
 
-
     useEffect(() => {
         document.getElementById("playlistViewSwitch").addEventListener('click', switchPlaylistView)
         return () => {
@@ -88,9 +89,16 @@ function App() {
     }, [])
 
 
-//    document.getElementById("playlistViewSwitch").addEventListener('click', () => {
-//        console.log("Click")
-//    })
+    function renderBasedOnTokenAndLoadingStatus(token, loading) {
+        return <LoginButton/>
+    }
+
+    const {logout} = useSpotifyAuth()
+
+    function handleClickSpotifyLogout() {
+        logout()
+    }
+
 
     //==================================================================
     //==================== RETURN STATEMENT ============================
@@ -101,14 +109,16 @@ function App() {
             {displayModalBasedOnModalState(displayModal)}
             <header>
                 <h1>Jammming - Create Playlist</h1>
+                {renderBasedOnTokenAndLoadingStatus()}
+                <p>Spotify token obtained |{useSpotifyAuth().token ? "✅" : "❌"}|</p>
+                <p>Spotify is loading |{useSpotifyAuth().loading.toString()}|</p>
+                <button onClick={handleClickSpotifyLogout}>Logout from Spotify</button>
             </header>
             <main>
                 <div className={styles.mainWrapper}>
 
                     <div className={styles.searchAndPlaylistNameSection}>
                         <SearchBar sendQueryDataToParent={getMusicQueryDetailsFromChild}/>
-
-
                         <div>
                             <input
                                 placeholder="Playlist name"
