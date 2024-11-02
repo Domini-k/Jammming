@@ -19,14 +19,12 @@ function UserAccountPlaylists({
 
     useEffect(() => {
         // RENAME THE PLAYLIST FUNCTIONALITY
-        if (playlistObjectToBeRenamed && newPlaylistName) {
-            let listOfUserPlaylistsAfterRenaming = []
-            for (const playlist of listOfUserPlaylists) {
-                let currentElement = playlist
-                if ((playlist.id === playlistObjectToBeRenamed.id) && (playlist.uri === playlistObjectToBeRenamed.uri)) {
-                    currentElement.name = newPlaylistName
+        if (playlistObjectToBeRenamed && newPlaylistName && listOfUserPlaylists) {
+            let listOfUserPlaylistsAfterRenaming = listOfUserPlaylists.toSpliced(listOfUserPlaylists.length)
+            for (const playlistObject of listOfUserPlaylistsAfterRenaming) {
+                if ((playlistObject.id === playlistObjectToBeRenamed.id) && (playlistObject.uri === playlistObjectToBeRenamed.uri)) {
+                    playlistObject.name = newPlaylistName
                 }
-                listOfUserPlaylistsAfterRenaming.push(currentElement)
             }
             setListOfUserPlaylists(listOfUserPlaylistsAfterRenaming)
         }
