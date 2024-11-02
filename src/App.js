@@ -2,9 +2,8 @@ import React, {useEffect, useState} from 'react';
 import styles from "./App.module.css";
 import SearchBar from "./components/SearchBar";
 import SearchResults from "./components/SearchResults";
-import Playlist from "./components/Playlist";
+import PlaylistsManager from "./components/PlaylistsManager";
 import Switch from "./styledComponents/Switch";
-import UserAccountPlaylists from "./components/UserAccountPlaylists";
 
 
 //TODO - There is a bug which makes the list not rerender after first render
@@ -33,7 +32,9 @@ function App() {
     }
 
     function handleClick(e) {
-        setClearPlaylistAndSaveToUserProfile(true)
+        if (!userPlaylistsViewerActive) {
+            setClearPlaylistAndSaveToUserProfile(true)
+        }
     }
 
     function deativateClearPlaylistAndSaveToUserProfileMarker() {
@@ -99,12 +100,13 @@ function App() {
                                         <Switch/>
                                     </div>
                                 </div>
-                                {userPlaylistsViewerActive ? "userPlaylistsViewerActive" : (
-                                    <Playlist addTrackToThePlaylist={trackAddedToPlaylist}
-                                              sendTrackOnPlaylistToMainComponent={getTracksOnPlaylistFromPlaylistComponent}
-                                              clearPlaylistAndSaveToUserProfile={clearPlaylistAndSaveToUserProfile}
-                                              deativateClearPlaylistAndSaveToUserProfileMarker={deativateClearPlaylistAndSaveToUserProfileMarker}/>)}
-
+                                <PlaylistsManager addTrackToThePlaylist={trackAddedToPlaylist}
+                                                  sendTrackOnPlaylistToMainComponent={getTracksOnPlaylistFromPlaylistComponent}
+                                                  clearPlaylistAndSaveToUserProfile={clearPlaylistAndSaveToUserProfile}
+                                                  deativateClearPlaylistAndSaveToUserProfileMarker={deativateClearPlaylistAndSaveToUserProfileMarker}
+                                                  activateUserPlaylistsViewer={userPlaylistsViewerActive}
+                                                  tracksOnUserPlaylist={tracksOnUserPlaylist}
+                                />
                             </div>
                         </div>
                     </div>
