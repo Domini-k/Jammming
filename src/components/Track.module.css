@@ -1,35 +1,45 @@
 .searchResultContent {
-  /* flex-direction: column; */
-  justify-content: space-between;
-  align-items: center;
-  background-color: white;
-  display: flex;
-  justify-items: flex-end;
-  padding: 10px;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    display: flex;
+    justify-items: flex-end;
+    padding: 10px;
 }
 
 .trackCardleftCol {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-/* .trackCardrightCol {
+.playlistCardImage {
+    max-width: 20%;
+    max-height: 20%;
 }
-.trackCardleftCol,
-.trackCardrightCol {
-} */
+
+.playlistCardleftCol {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
 .addButtonStyling,
-.removeButtonStyling {
-  padding: 10px;
-  border-radius: 5px;
-  color: white;
+.removeButtonStyling, .renameButtonStyling {
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
 }
 
 .addButtonStyling {
-  background-color: #27272a;
+    background-color: #27272a;
 }
+
 .removeButtonStyling {
-  background-color: #de5e5e;
+    background-color: #de5e5e;
+}
+
+.renameButtonStyling {
+    background-color: dimgray;
 }

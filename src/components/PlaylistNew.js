@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import Tracklist from './Tracklist'
-import styles from "./Playlist_new.module.css";
+import styles from "./PlaylistNew.module.css";
 
-function Playlist_new({listOfTrackObjectsFromResponse, typeOfTracklist, getRemovedTrackFromPlaylistFromTrackChild}) {
+function PlaylistNew({listOfTrackObjectsFromResponse, typeOfTracklist, getRemovedTrackFromPlaylistFromTrackChild}) {
     return (
         <Tracklist listOfTrackObjectsFromResponse={listOfTrackObjectsFromResponse}
                    typeOfTracklist={typeOfTracklist}
@@ -10,4 +10,4 @@ function Playlist_new({listOfTrackObjectsFromResponse, typeOfTracklist, getRemov
     )
 }
 
-export default Playlist_new
+export default PlaylistNew

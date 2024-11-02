@@ -1,16 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import styles from "./PlaylistsManager.module.css";
-import Playlist_new from "./Playlist_new";
+import PlaylistNew from "./PlaylistNew";
 import UserAccountPlaylists from "./UserAccountPlaylists";
 
 function PlaylistsManager({
                               addTrackToThePlaylist,
                               sendTrackOnPlaylistToMainComponent,
                               clearPlaylistAndSaveToUserProfile,
-                              deativateClearPlaylistAndSaveToUserProfileMarker,
+                              deactivateClearPlaylistAndSaveToUserProfileMarker,
                               activateUserPlaylistsViewer,
-                              tracksOnUserPlaylist
+                              tracksOnUserPlaylist,
+                              changeActivationStatusOfRenameModal,
+                              playlistObjectToBeRenamed,
+                              passPlaylistToBeRenamedDetailsToModal,
+                              newPlaylistName
                           }) {
+
 
     const [tracksInPlaylist, setTracksInPlaylist] = useState(tracksOnUserPlaylist ?? [])
     const [playlistName, setPlaylistName] = useState('')
@@ -30,13 +35,11 @@ function PlaylistsManager({
             setPlaylistName(document.getElementById("playlistName").value)
             savePlaylistToUserProfile(playlistName, tracksInPlaylist)
             setTracksInPlaylist([])
-            deativateClearPlaylistAndSaveToUserProfileMarker()
+            deactivateClearPlaylistAndSaveToUserProfileMarker()
         }
     }, [clearPlaylistAndSaveToUserProfile])
 
     useEffect(() => {
-//        console.log("Add track - " + addTrackToThePlaylist)
-//        console.log("Is it already on the list? - " + tracksInPlaylist.includes(addTrackToThePlaylist))
         let isTrackAlreadyPresentInPlaylist
         for (let element of tracksInPlaylist) {
             if (element.uri === addTrackToThePlaylist.uri) {
@@ -64,12 +67,20 @@ function PlaylistsManager({
     }, [tracksInPlaylist])
 
 
-    // console.log(activateUserPlaylistsViewer)
+    return activateUserPlaylistsViewer ?
+        (
+            <UserAccountPlaylists changeActivationStatusOfRenameModal={changeActivationStatusOfRenameModal}
+                                  playlistObjectToBeRenamed={playlistObjectToBeRenamed}
+                                  passPlaylistToBeRenamedDetailsToModal={passPlaylistToBeRenamedDetailsToModal}
+                                  newPlaylistName={newPlaylistName}
+            />
+        ) :
+        (
 
-
-    return activateUserPlaylistsViewer ? (<UserAccountPlaylists/>) : (
-        <Playlist_new listOfTrackObjectsFromResponse={tracksInPlaylist} typeOfTracklist="Playlist"
-                      getRemovedTrackFromPlaylistFromTrackChild={getRemovedTrackFromPlaylistFromTrackChild}/>)
+            <PlaylistNew listOfTrackObjectsFromResponse={tracksInPlaylist}
+                         typeOfTracklist="Playlist"
+                         getRemovedTrackFromPlaylistFromTrackChild={getRemovedTrackFromPlaylistFromTrackChild}/>
+        )
 
 
 }

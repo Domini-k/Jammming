@@ -1,9 +1,10 @@
 * {
-  font-family: "Roboto", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  border: 0;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    border: 0;
 }
+
 main,
 .mainWrapper,
 .colLeft,
@@ -11,164 +12,213 @@ main,
 .subColLeft,
 .subColRight,
 .searchResultsWrapper {
-  min-height: 0;
+    min-height: 0;
 }
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: "Roboto Condensed", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 600;
-  font-style: normal;
+    font-family: "Roboto Condensed", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
 }
+
 h1 {
-  font-size: 4em;
+    font-size: 4em;
 }
+
 h3,
 p {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 }
+
 /* btn reset */
 button {
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
 }
+
 input {
-  border-radius: 5px;
-  border: 1px solid #d8d8da;
+    border-radius: 5px;
+    border: 1px solid #d8d8da;
 }
+
 .App {
-  /* width: 100vw;
-  height: 100vh;
-  max-width: 100%;
-  max-height: 100%; */
-  position: fixed;
-  inset: 0;
-  /* border: 5px solid brown; */
-  display: flex;
-  flex-direction: column;
-  max-width: 1400px;
-  margin: auto;
-  padding: 0 20px 40px 20px;
+    /* width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    max-height: 100%; */
+    position: fixed;
+    inset: 0;
+    /* border: 5px solid brown; */
+    display: flex;
+    flex-direction: column;
+    max-width: 1400px;
+    margin: auto;
+    padding: 0 20px 40px 20px;
 }
+
+
+.modalWrapper {
+    min-width: 100%;
+    min-height: 100%;
+    position: fixed;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+/*.modalWrapper > div {*/
+/*    z-index: 3;*/
+/*    margin: 0 auto 10% auto;*/
+/*    width: 20%;*/
+/*    border: 1px solid red;*/
+/*}*/
+
+.modalDeactivationBackground {
+    top: 0;
+    left: 0;
+    height: 100%;
+    min-width: 100%;
+    position: fixed;
+    z-index: 2;
+    cursor: pointer;
+    background-color: rgba(36, 36, 36, 0.61);
+    backdrop-filter: blur(7px);
+}
+
 main {
-  /* border: 5px solid darkkhaki; */
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+    /* border: 5px solid darkkhaki; */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
+
 .mainWrapper {
-  /* border: 5px solid darkmagenta; */
-  display: flex;
-  gap: 20px;
-  flex-direction: column;
-  justify-content: space-between;
+    /* border: 5px solid darkmagenta; */
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    justify-content: space-between;
 }
+
 .searchAndPlaylistNameSection {
-  display: flex;
-  gap: 20px;
+    display: flex;
+    gap: 20px;
 }
 
 .searchAndPlaylistNameSection > * {
-  flex: 1;
+    flex: 1;
 }
 
 .playlistNameInput {
-  width: 100%;
-  padding: 10px;
+    width: 100%;
+    padding: 10px;
 }
+
 .trackListsSection {
-  display: flex;
-  gap: 20px;
-  max-height: 100%;
-  overflow: hidden;
+    display: flex;
+    gap: 20px;
+    max-height: 100%;
+    overflow: hidden;
 }
 
 .colLeft {
-  /* border: 5px solid brown; */
-  /* flex: 1; */
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+    /* border: 5px solid brown; */
+    /* flex: 1; */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
+
 .subColLeft {
-  background-color: #e4e4e5;
-  /* border: 5px solid goldenrod; */
-  border-radius: 5px;
-  margin-top: 20px;
-  padding: 0 20px;
-  height: 100%;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+    background-color: #e4e4e5;
+    /* border: 5px solid goldenrod; */
+    border-radius: 5px;
+    margin-top: 20px;
+    padding: 0 20px;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
+
 .colRight {
-  /* border: 5px solid green; */
-  /* flex: 1; */
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
+    /* border: 5px solid green; */
+    /* flex: 1; */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
 }
+
 .playlistNameInput {
-  padding: 10px;
-  width: 100%;
+    padding: 10px;
+    width: 100%;
 }
 
 .subColRight {
-  background-color: #e4e4e5;
-  /* border: 5px solid goldenrod; */
-  border-radius: 5px;
-  margin-top: 20px;
-  padding: 0 20px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+    background-color: #e4e4e5;
+    /* border: 5px solid goldenrod; */
+    border-radius: 5px;
+    margin-top: 20px;
+    padding: 0 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .rightHeaderWrapper {
-  display: flex;
-  gap: 20px;
-  align-items: center;
+    display: flex;
+    gap: 20px;
+    align-items: center;
 }
 
 .rightHeader {
-  /*  flex: 1;*/
+    /*  flex: 1;*/
 
 }
 
 
 .savePlaylistBtnWrapper {
-  display: flex;
-  margin-top: 20px;
-  gap: 20px;
-  justify-content: space-between;
+    display: flex;
+    margin-top: 20px;
+    gap: 20px;
+    justify-content: space-between;
 }
+
 .savePlaylistBtnSpacer {
-  flex: 1;
+    flex: 1;
 }
+
 .savePlaylistBtn {
-  flex: 1;
-  padding: 10px 0;
-  font-family: "Roboto Condensed", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 300;
-  font-style: normal;
-  font-size: 1.3em;
-  background-color: #8a8a8d;
-  color: white;
-  transition: all 0.1s ease-in;
-  text-shadow: 1px 1px 4px black;
-  border-radius: 5px;
+    flex: 1;
+    padding: 10px 0;
+    font-family: "Roboto Condensed", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 1.3em;
+    background-color: #8a8a8d;
+    color: white;
+    transition: all 0.1s ease-in;
+    text-shadow: 1px 1px 4px black;
+    border-radius: 5px;
 }
+
 .savePlaylistBtn:hover {
-  background-color: #b4b4b4;
-  text-shadow: 1px 1px 1px black;
+    background-color: #b4b4b4;
+    text-shadow: 1px 1px 1px black;
 }

@@ -3,7 +3,8 @@ import styles from "./App.module.css";
 import SearchBar from "./components/SearchBar";
 import SearchResults from "./components/SearchResults";
 import PlaylistsManager from "./components/PlaylistsManager";
-import Switch from "./styledComponents/Switch";
+import Switch from "./components/styledComponents/Switch";
+import RenameModal from "./components/styledComponents/RenameModal";
 
 
 //TODO - There is a bug which makes the list not rerender after first render
@@ -17,6 +18,10 @@ function App() {
     const [tracksOnUserPlaylist, setTracksOnUserPlaylist] = useState();
     const [clearPlaylistAndSaveToUserProfile, setClearPlaylistAndSaveToUserProfile] = useState(false);
     const [userPlaylistsViewerActive, setUserPlaylistsViewerActive] = useState(false);
+    const [displayModal, setDisplayModal] = useState(false);
+    const [playlistObjectToBeRenamed, setPlaylistObjectToBeRenamed] = useState();
+    const [newPlaylistName, setNewPlaylistName] = useState();
+    const [playlistToBeRenamedDetailsToModal, setPlaylistToBeRenamedDetailsToModal] = useState();
 
     function getTracksOnPlaylistFromPlaylistComponent(data) {
         setTracksOnUserPlaylist(data)
@@ -37,7 +42,7 @@ function App() {
         }
     }
 
-    function deativateClearPlaylistAndSaveToUserProfileMarker() {
+    function deactivateClearPlaylistAndSaveToUserProfileMarker() {
         setClearPlaylistAndSaveToUserProfile(false)
     }
 
@@ -45,12 +50,44 @@ function App() {
         setUserPlaylistsViewerActive(prevState => !prevState)
     }
 
+    function changeActivationStatusOfRenameModal(isComponentActivated) {
+        setDisplayModal(isComponentActivated);
+    }
+
+    function renamePlaylistFromUserPlaylists(playlistObjectToBeRenamed, newPlaylistNameString) {
+        setPlaylistObjectToBeRenamed(playlistObjectToBeRenamed)
+        setNewPlaylistName(newPlaylistNameString)
+    }
+
+    function passPlaylistToBeRenamedDetailsToModal(playlistToBeRenamed) {
+        setPlaylistToBeRenamedDetailsToModal(playlistToBeRenamed)
+    }
+
+    function displayModalBasedOnModalState(displayModal) {
+        if (displayModal) {
+            return (
+                <div className={styles.modalWrapper}>
+                    <div className={styles.modalDeactivationBackground} onClick={() => {
+                        changeActivationStatusOfRenameModal(false)
+                    }}></div>
+                    <RenameModal changeActivationStatusOfRenameModal={changeActivationStatusOfRenameModal}
+                                 renamePlaylistFromUserPlaylists={renamePlaylistFromUserPlaylists}
+                                 playlistToBeRenamedDetailsToModal={playlistToBeRenamedDetailsToModal}
+                    />
+                </div>
+            )
+        }
+    }
+
+
     useEffect(() => {
         document.getElementById("playlistViewSwitch").addEventListener('click', switchPlaylistView)
         return () => {
             document.getElementById("playlistViewSwitch").removeEventListener('click', switchPlaylistView)
         }
     }, [])
+
+
 //    document.getElementById("playlistViewSwitch").addEventListener('click', () => {
 //        console.log("Click")
 //    })
@@ -61,6 +98,7 @@ function App() {
 
     return (
         <div className={styles.App}>
+            {displayModalBasedOnModalState(displayModal)}
             <header>
                 <h1>Jammming - Create Playlist</h1>
             </header>
@@ -103,9 +141,13 @@ function App() {
                                 <PlaylistsManager addTrackToThePlaylist={trackAddedToPlaylist}
                                                   sendTrackOnPlaylistToMainComponent={getTracksOnPlaylistFromPlaylistComponent}
                                                   clearPlaylistAndSaveToUserProfile={clearPlaylistAndSaveToUserProfile}
-                                                  deativateClearPlaylistAndSaveToUserProfileMarker={deativateClearPlaylistAndSaveToUserProfileMarker}
+                                                  deactivateClearPlaylistAndSaveToUserProfileMarker={deactivateClearPlaylistAndSaveToUserProfileMarker}
                                                   activateUserPlaylistsViewer={userPlaylistsViewerActive}
                                                   tracksOnUserPlaylist={tracksOnUserPlaylist}
+                                                  changeActivationStatusOfRenameModal={changeActivationStatusOfRenameModal}
+                                                  playlistObjectToBeRenamed={playlistObjectToBeRenamed}
+                                                  passPlaylistToBeRenamedDetailsToModal={passPlaylistToBeRenamedDetailsToModal}
+                                                  newPlaylistName={newPlaylistName}
                                 />
                             </div>
                         </div>
@@ -119,8 +161,7 @@ function App() {
                 </div>
 
             </main>
-        </div>
-    );
+        </div>);
 //==================================================================
 //==================== RETURN STATEMENT ============================
 //==================================================================

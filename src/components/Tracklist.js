@@ -2,13 +2,15 @@ import React, {useEffect, useState} from 'react';
 import Track from './Track';
 import styles from './Tracklist.module.css'
 
-function Tracklist({
-                       listOfTrackObjectsFromResponse,
-                       typeOfTracklist,
-                       getAddedTrackToPlaylistFromTrackChild,
-                       trackRemovedFromSearchList,
-                       getRemovedTrackFromPlaylistFromTrackChild
-                   }) {
+function Tracklist(props) {
+
+    let listOfTrackObjectsFromResponse = props.listOfTrackObjectsFromResponse ?? props.listOfPlaylistsFromResponse
+    let typeOfTracklist = props.typeOfTracklist
+    let getAddedTrackToPlaylistFromTrackChild = props.getAddedTrackToPlaylistFromTrackChild
+    let trackRemovedFromSearchList = props.trackRemovedFromSearchList
+    let getRemovedTrackFromPlaylistFromTrackChild = props.getRemovedTrackFromPlaylistFromTrackChild
+
+
     const [listOfTrackTagsFromResponse, setlistOfTrackTagsFromResponse] = useState([])
 
 //    console.log("START=====================================================")
@@ -22,17 +24,27 @@ function Tracklist({
 //        console.log(typeOfTracklist)
 //        console.log("The list on the left will be set")
 //        console.log("Object that will be used -> " + listOfTrackObjectsFromResponse)
-        setlistOfTrackTagsFromResponse(
-            listOfTrackObjectsFromResponse.map(({name, artist, album, id, uri}, key) => {
-                return (
-                    <Track key={key} name={name} artist={artist} album={album} id={id}
-                           typeOfTracklist={typeOfTracklist}
-                           getAddedTrackToPlaylistFromTrackChild={getAddedTrackToPlaylistFromTrackChild}
-                           getRemovedTrackFromPlaylistFromTrackChild={getRemovedTrackFromPlaylistFromTrackChild}
-                           uri={uri}/>
-                )
-            })
-        )
+
+        if (listOfTrackObjectsFromResponse) {
+
+            setlistOfTrackTagsFromResponse(
+                listOfTrackObjectsFromResponse.map(({name, artist, album, id, uri, images}, key) => {
+                    return (
+                        <Track key={key} name={name} artist={artist} album={album} id={id}
+                               typeOfTracklist={typeOfTracklist}
+                               getAddedTrackToPlaylistFromTrackChild={getAddedTrackToPlaylistFromTrackChild}
+                               getRemovedTrackFromPlaylistFromTrackChild={getRemovedTrackFromPlaylistFromTrackChild}
+                               uri={uri} playlistImages={images}
+                               changeActivationStatusOfRenameModal={props.changeActivationStatusOfRenameModal}
+                               passPlaylistToBeRenamedDetailsToModal={props.passPlaylistToBeRenamedDetailsToModal}
+                        />
+                    )
+                })
+            )
+
+        }
+
+
     }, [listOfTrackObjectsFromResponse])
 
 
