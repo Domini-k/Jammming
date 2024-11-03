@@ -11,10 +11,6 @@ import LogoutButton from "./components/styledComponents/LogoutButton";
 import {spotifyAuth} from "./api/spotifyAuth";
 
 
-//TODO - There is a bug which makes the list not rerender after first render
-// To redo this problem user needs to enter search query, click the button, then change the query and click the button.
-
-
 function App() {
     const [musicSearchQuery, setMusicSearchQuery] = useState();
     const [trackAddedToPlaylist, setTrackAddedToPlaylist] = useState();
@@ -90,12 +86,16 @@ function App() {
         }
     }, [])
 
+
     const [initiateSpotifyApiAuth, setInitiateSpotifyApiAuth] = useState(true);
     const [userClickedAuthButton, setUserClickedAuthButton] = useState(false);
     const [spotifyToken, setSpotifyToken] = useState();
+    const [spotifyTokenExpirationDate, setSpotifyTokenExpirationDate] = useState();
 
-    function setAuthTokenWhenObtainedInMainComponent(token) {
+    function setAuthTokenWhenObtainedInMainComponent(token, authTokenExpirationTime) {
         setSpotifyToken(token)
+        setSpotifyTokenExpirationDate(authTokenExpirationTime)
+
     }
 
     function spotifyAuthStatusSetter(spotifyAuthStatus) {

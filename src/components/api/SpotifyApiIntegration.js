@@ -88,7 +88,7 @@ function SpotifyApiIntegration({
     useEffect(() => {
         if (authToken && spotifyAuth.isTokenValid(authTokenExpirationTime)) {
             spotifyAuthStatusSetter(true);
-            setAuthTokenWhenObtainedInMainComponent(authToken)
+            setAuthTokenWhenObtainedInMainComponent(authToken, authTokenExpirationTime)
             console.log("Token Valid and not expired")
         }
     }, [authToken, authTokenExpirationTime]);

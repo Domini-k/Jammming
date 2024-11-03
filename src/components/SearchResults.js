@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import Tracklist from './Tracklist'
 import styles from "./SearchResults.module.css";
+import {spotifyService} from "../services/spotifyService";
+import Loader from "./styledComponents/Loader";
+
 // Mockup values to avoid using API for testing purposes
 const apiResponse = [
     {
@@ -116,39 +119,57 @@ const apiResponse = [
         uri: "spotify:track:1"
     }
 ]
-const apiResponseRandomized = apiResponse.slice(Math.random() * (apiResponse.length - 1) + 1)
+// const apiResponseRandomized = apiResponse.slice(Math.random() * (apiResponse.length - 1) + 1)
 
 // =====================================================
 function SearchResults({queryText, getAddedTrackToPlaylistFromTrackChild, removeTrackFromTheSearchResultsList}) {
-    const [listOfTrackObjectsFromResponse, setlistOfTrackObjectsFromResponse] = useState([])
+    const [listOfTrackObjectsFromResponse, setListOfTrackObjectsFromResponse] = useState([])
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
 // =====================================================
 // PLACE FOR SPOTIFY API CALL
 // =====================================================
     useEffect(() => {
-        if (queryText && queryText.length > 0) {
-            setlistOfTrackObjectsFromResponse(apiResponseRandomized)
-        }
-//        let temp = 1
-//        console.log("regenerated")
-//        console.log(apiResponseRandomized.length)
-//        console.log(temp)
-//        temp++
+        const searchTracks = async () => {
+            if (!queryText || queryText.length === 0) {
+                setListOfTrackObjectsFromResponse([]);
+                return;
+            }
+
+            try {
+                setIsLoading(true);
+                setError(null);
+                // Call for list of tracks
+                const response = await spotifyService.searchTracks(queryText);
+                setListOfTrackObjectsFromResponse(response.tracks.items);
+            } catch (err) {
+                setError('Failed to fetch tracks. Please try again.');
+                console.error('Search tracks error:', err);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        const timeoutId = setTimeout(() => {
+            searchTracks();
+        }, 300);
+
+        return () => clearTimeout(timeoutId);
     }, [queryText])
-// =====================================================
 
-//    console.log("listOfTrackObjectsFromResponse SearchResults Component")
-//    console.log(listOfTrackObjectsFromResponse)
 
-//    Here The value of listOfTrackObjectsFromResponse is constantly updated and is always equal to Api Response
-//    Behavior looks ok, the list is not re-rendered on button click somewhere else
-
+    if (error) {
+        return <div className="error-message">{error}</div>;
+    }
+    if (isLoading) {
+        return <Loader/>
+    }
     return (
-        <Tracklist listOfTrackObjectsFromResponse={listOfTrackObjectsFromResponse} typeOfTracklist="SearchResultsList"
+        <Tracklist listOfTrackObjectsFromResponse={listOfTrackObjectsFromResponse}
+                   typeOfTracklist="SearchResultsList"
                    getAddedTrackToPlaylistFromTrackChild={getAddedTrackToPlaylistFromTrackChild}
-                   trackRemovedFromSearchList={removeTrackFromTheSearchResultsList}/>
+                   trackRemovedFromSearchList={removeTrackFromTheSearchResultsList}
+        />
     )
-
-
 }
 
 export default SearchResults
