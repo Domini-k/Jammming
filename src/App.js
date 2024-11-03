@@ -10,7 +10,9 @@ import SpotifyApiIntegration from "./components/api/SpotifyApiIntegration";
 import LogoutButton from "./components/styledComponents/LogoutButton";
 import {spotifyAuth} from "./api/spotifyAuth";
 
-// TODO - Rename, Create a Playlist, App responsiveness
+// TODO - Rename, App responsiveness
+// TODO - Creating playlist validation - Don't create when there is already one present with the same name
+// TODO - Better token management. It's authenticating automatically after it expires without any prompt / info
 
 function App() {
     const [musicSearchQuery, setMusicSearchQuery] = useState();
@@ -23,6 +25,7 @@ function App() {
     const [playlistObjectToBeRenamed, setPlaylistObjectToBeRenamed] = useState();
     const [newPlaylistName, setNewPlaylistName] = useState();
     const [playlistToBeRenamedDetailsToModal, setPlaylistToBeRenamedDetailsToModal] = useState();
+    const [clearSearchResultsStatus, setClearSearchResultsStatus] = useState(false);
 
     function getTracksOnPlaylistFromPlaylistComponent(data) {
         setTracksOnUserPlaylist(data)
@@ -80,6 +83,10 @@ function App() {
         }
     }
 
+    function clearSearchResults() {
+        setClearSearchResultsStatus(true)
+    }
+
     useEffect(() => {
         document.getElementById("playlistViewSwitch").addEventListener('click', switchPlaylistView)
         return () => {
@@ -126,7 +133,8 @@ function App() {
                     <div className={styles.statusAndLogoutButtonsWrapper}>
                         <SpotifyApiIntegration spotifyAuthStatusSetter={spotifyAuthStatusSetter}
                                                userClickedAuthButton={userClickedAuthButton}
-                                               setAuthTokenWhenObtainedInMainComponent={setAuthTokenWhenObtainedInMainComponent}/>
+                                               setAuthTokenWhenObtainedInMainComponent={setAuthTokenWhenObtainedInMainComponent}
+                        />
                         <LogoutButton performSpotifyLogout={performSpotifyLogout}/>
                     </div> :
                     <LoginButton spotifyAuthStatusSetter={spotifyAuthStatusSetter}
@@ -159,7 +167,9 @@ function App() {
                                 <h2>Search Results</h2>
                                 <SearchResults queryText={musicSearchQuery}
                                                getAddedTrackToPlaylistFromTrackChild={getAddedTrackToPlaylistFromTrackChild}
-                                               removeTrackFromTheSearchResultsList={trackRemovedFromSearchList}/>
+                                               removeTrackFromTheSearchResultsList={trackRemovedFromSearchList}
+                                               clearSearchResultsStatus={clearSearchResultsStatus}
+                                />
                             </div>
                         </div>
                         <div className={styles.colRight}>
@@ -181,6 +191,7 @@ function App() {
                                                   playlistObjectToBeRenamed={playlistObjectToBeRenamed}
                                                   passPlaylistToBeRenamedDetailsToModal={passPlaylistToBeRenamedDetailsToModal}
                                                   newPlaylistName={newPlaylistName}
+                                                  clearSearchResults={clearSearchResults}
                                 />
                             </div>
                         </div>

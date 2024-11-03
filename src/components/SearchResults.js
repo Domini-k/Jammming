@@ -122,10 +122,25 @@ const apiResponse = [
 // const apiResponseRandomized = apiResponse.slice(Math.random() * (apiResponse.length - 1) + 1)
 
 // =====================================================
-function SearchResults({queryText, getAddedTrackToPlaylistFromTrackChild, removeTrackFromTheSearchResultsList}) {
+function SearchResults({
+                           queryText,
+                           getAddedTrackToPlaylistFromTrackChild,
+                           removeTrackFromTheSearchResultsList,
+                           clearSearchResultsStatus
+                       }) {
     const [listOfTrackObjectsFromResponse, setListOfTrackObjectsFromResponse] = useState([])
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+
+    useEffect(() => {
+
+        if (clearSearchResultsStatus) {
+            setListOfTrackObjectsFromResponse([])
+        }
+
+    }, [clearSearchResultsStatus]);
+
+
 // =====================================================
 // PLACE FOR SPOTIFY API CALL
 // =====================================================
