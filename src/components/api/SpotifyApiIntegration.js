@@ -18,6 +18,7 @@ function SpotifyApiIntegration({
     const [authTokenExpirationTime, setAuthTokenExpirationTime] = useState(localStorage.getItem('spotify_token_expiration'));
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [isTokenExpired, setIsTokenExpired] = useState(!spotifyAuth.isTokenValid(authTokenExpirationTime));
 
     const handleTokenFromUrl = () => {
         try {
@@ -70,15 +71,15 @@ function SpotifyApiIntegration({
             setLoading(false);
         }
         // Handle initial state
-        else if (!authToken && userClickedAuthButton) {
+        else if ((!authToken || isTokenExpired) && userClickedAuthButton) {
             console.log("Auth is required");
             performLoginToSpotify();
-        } else if (!authToken && !userClickedAuthButton) {
+        } else if ((!authToken || isTokenExpired) && !userClickedAuthButton) {
             console.log("Connection not established, user needs to click the button");
             spotifyAuthStatusSetter(false);
             setLoading(false);
         } else {
-            console.log("Connection already established");
+            // console.log("Connection already established");
             spotifyAuthStatusSetter(true);
             setLoading(false);
         }
@@ -89,7 +90,7 @@ function SpotifyApiIntegration({
         if (authToken && spotifyAuth.isTokenValid(authTokenExpirationTime)) {
             spotifyAuthStatusSetter(true);
             setAuthTokenWhenObtainedInMainComponent(authToken, authTokenExpirationTime)
-            console.log("Token Valid and not expired")
+            // console.log("Token Valid and not expired")
         }
     }, [authToken, authTokenExpirationTime]);
 

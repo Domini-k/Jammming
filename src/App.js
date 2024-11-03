@@ -10,6 +10,7 @@ import SpotifyApiIntegration from "./components/api/SpotifyApiIntegration";
 import LogoutButton from "./components/styledComponents/LogoutButton";
 import {spotifyAuth} from "./api/spotifyAuth";
 
+// TODO - Rename, Create a Playlist, App responsiveness
 
 function App() {
     const [musicSearchQuery, setMusicSearchQuery] = useState();

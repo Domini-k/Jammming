@@ -15,6 +15,9 @@ class SpotifyService {
     // Helper method for making API requests
     async makeRequest(endpoint, options = {}) {
         try {
+            if (!localStorage.getItem('spotify_token')) {
+                throw new Error('Connection with Spotify is not established');
+            }
             const response = await fetch(`${this.baseUrl}${endpoint}`, {
                 ...options,
                 headers: this.getHeaders()
@@ -41,6 +44,11 @@ class SpotifyService {
     // Get user's playlists
     async getUserPlaylists(limit = 50) {
         return await this.makeRequest('/me/playlists');
+    }
+
+    // Get current user's Profile
+    async getUserProfile() {
+        return await this.makeRequest('/me');
     }
 
     // Create a playlist

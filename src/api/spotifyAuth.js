@@ -2,7 +2,7 @@ export const spotifyAuth = {
     async login() {
         const client_id = "307a5966baa344daa3c416c8c5f46b24";
         const redirect_uri = "http://localhost:3000/";
-        const scope = 'user-read-private playlist-modify-public playlist-modify-private user-read-email';
+        const scope = 'user-read-private playlist-modify-public playlist-modify-private user-read-email playlist-read-private';
         const state = window.crypto.randomUUID().toString().substring(0, 15);
         let url = 'https://accounts.spotify.com/authorize';
         url += '?response_type=token';
@@ -38,9 +38,9 @@ export const spotifyAuth = {
     isTokenValid(expirationTime) {
         if (!expirationTime) return false;
         // Add a 60-second buffer to prevent edge cases
-        console.log("Date now -> " + Date.now().toString())
-        console.log("expirationTime -> " + (expirationTime - 60000).toString())
-        console.log("Current time - Time left of the token -> " + Math.floor(((expirationTime - 60000) - (Date.now())) / (60000)).toString() + " min.")
+        // console.log("Date now -> " + new Date(Date.now()).toString())
+        // console.log("expirationTime -> " + new Date((expirationTime - 60000)).toString())
+        // console.log("Current time - Time left of the token -> " + Math.floor(((expirationTime - 60000) - (Date.now())) / (60000)).toString() + " min.")
         return Date.now() < (expirationTime - 60000);
     },
 
