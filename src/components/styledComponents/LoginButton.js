@@ -1,13 +1,17 @@
 import React from 'react';
-import {useSpotifyAuth} from '../../api/useSpotifyAuth';
 import styled from 'styled-components';
 
 
-function LoginButton() {
-    const {login} = useSpotifyAuth();
+function LoginButton({spotifyAuthStatusSetter, performAuthWithUserConsent}) {
+
+    function handleClick() {
+        spotifyAuthStatusSetter(true)
+        performAuthWithUserConsent(true)
+    }
+
     return (
         <StyledWrapper>
-            <button className="buttonSpotify" onClick={login}>
+            <button className="buttonSpotify" onClick={handleClick}>
                 <svg viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg"
                      xmlnsXlink="http://www.w3.org/1999/xlink" fill="#000000">
                     <g id="SVGRepo_bgCarrier" strokeWidth={0}/>

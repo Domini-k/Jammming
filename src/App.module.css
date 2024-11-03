@@ -28,7 +28,7 @@ h6 {
 }
 
 h1 {
-    font-size: 4em;
+    font-size: 3.9em;
 }
 
 h3,
@@ -103,6 +103,17 @@ header {
     gap: 20px;
 }
 
+header > * {
+    width: 100%;
+}
+
+.statusAndLogoutButtonsWrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+
 main {
     /* border: 5px solid darkkhaki; */
     display: flex;
@@ -117,6 +128,7 @@ main {
     flex-direction: column;
     justify-content: space-between;
 }
+
 
 .searchAndPlaylistNameSection {
     display: flex;

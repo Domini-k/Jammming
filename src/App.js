@@ -6,7 +6,9 @@ import PlaylistsManager from "./components/PlaylistsManager";
 import Switch from "./components/styledComponents/Switch";
 import RenameModal from "./components/styledComponents/RenameModal";
 import LoginButton from "./components/styledComponents/LoginButton";
-import {useSpotifyAuth} from './api/useSpotifyAuth';
+import SpotifyApiIntegration from "./components/api/SpotifyApiIntegration";
+import LogoutButton from "./components/styledComponents/LogoutButton";
+import {spotifyAuth} from "./api/spotifyAuth";
 
 
 //TODO - There is a bug which makes the list not rerender after first render
@@ -88,17 +90,27 @@ function App() {
         }
     }, [])
 
+    const [initiateSpotifyApiAuth, setInitiateSpotifyApiAuth] = useState(true);
+    const [userClickedAuthButton, setUserClickedAuthButton] = useState(false);
+    const [spotifyToken, setSpotifyToken] = useState();
 
-    function renderBasedOnTokenAndLoadingStatus(token, loading) {
-        return <LoginButton/>
+    function setAuthTokenWhenObtainedInMainComponent(token) {
+        setSpotifyToken(token)
     }
 
-    const {logout} = useSpotifyAuth()
-
-    function handleClickSpotifyLogout() {
-        logout()
+    function spotifyAuthStatusSetter(spotifyAuthStatus) {
+        setInitiateSpotifyApiAuth(spotifyAuthStatus);
     }
 
+    function performAuthWithUserConsent(boolVal) {
+        setUserClickedAuthButton(boolVal)
+    }
+
+    function performSpotifyLogout() {
+        spotifyAuth.logout()
+        setInitiateSpotifyApiAuth(false)
+        console.log("Logged out")
+    }
 
     //==================================================================
     //==================== RETURN STATEMENT ============================
@@ -109,10 +121,20 @@ function App() {
             {displayModalBasedOnModalState(displayModal)}
             <header>
                 <h1>Jammming - Create Playlist</h1>
-                {renderBasedOnTokenAndLoadingStatus()}
-                <p>Spotify token obtained |{useSpotifyAuth().token ? "✅" : "❌"}|</p>
-                <p>Spotify is loading |{useSpotifyAuth().loading.toString()}|</p>
-                <button onClick={handleClickSpotifyLogout}>Logout from Spotify</button>
+                {initiateSpotifyApiAuth ?
+                    <div className={styles.statusAndLogoutButtonsWrapper}>
+                        <SpotifyApiIntegration spotifyAuthStatusSetter={spotifyAuthStatusSetter}
+                                               userClickedAuthButton={userClickedAuthButton}
+                                               setAuthTokenWhenObtainedInMainComponent={setAuthTokenWhenObtainedInMainComponent}/>
+                        <LogoutButton performSpotifyLogout={performSpotifyLogout}/>
+                    </div> :
+                    <LoginButton spotifyAuthStatusSetter={spotifyAuthStatusSetter}
+                                 performAuthWithUserConsent={performAuthWithUserConsent}/>}
+
+                {/*{renderBasedOnTokenAndLoadingStatus()}*/}
+                {/*<p>Spotify token obtained |{useSpotifyAuth().token ? "✅" : "❌"}|</p>*/}
+                {/*<p>Spotify is loading |{useSpotifyAuth().loading.toString()}|</p>*/}
+                {/*<button onClick={handleClickSpotifyLogout}>Logout from Spotify</button>*/}
             </header>
             <main>
                 <div className={styles.mainWrapper}>

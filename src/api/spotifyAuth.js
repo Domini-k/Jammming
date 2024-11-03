@@ -22,13 +22,30 @@ export const spotifyAuth = {
                 initial[parts[0]] = decodeURIComponent(parts[1]);
                 return initial;
             }, {});
-
-        return hash.access_token;
+        const token = hash.access_token;
+        const expiresIn = hash.expires_in ? parseInt(hash.expires_in) : 3600; // Default 1 hour if not provided
+        console.log(expiresIn)
+        if (token) {
+            // Store both token and its expiration timestamp
+            const expirationTime = Date.now() + (expiresIn * 1000);
+            return {
+                token,
+                expirationTime
+            };
+        }
+        return null;
+    },
+    isTokenValid(expirationTime) {
+        if (!expirationTime) return false;
+        // Add a 60-second buffer to prevent edge cases
+        console.log("Date now -> " + Date.now().toString())
+        console.log("expirationTime -> " + (expirationTime - 60000).toString())
+        console.log("Current time - Time left of the token -> " + Math.floor(((expirationTime - 60000) - (Date.now())) / (60000)).toString() + " min.")
+        return Date.now() < (expirationTime - 60000);
     },
 
     logout() {
-        // Logout logic
         localStorage.removeItem('spotify_token');
-        // Additional cleanup
+        localStorage.removeItem('spotify_token_expiration');
     }
 };
