@@ -16,7 +16,8 @@ function PlaylistsManager({
                               playlistObjectToBeRenamed,
                               passPlaylistToBeRenamedDetailsToModal,
                               newPlaylistName,
-                              clearSearchResults
+                              clearSearchResults,
+                              resetNewPlaylistName
                           }) {
 
 
@@ -99,6 +100,7 @@ function PlaylistsManager({
                                   playlistObjectToBeRenamed={playlistObjectToBeRenamed}
                                   passPlaylistToBeRenamedDetailsToModal={passPlaylistToBeRenamedDetailsToModal}
                                   newPlaylistName={newPlaylistName}
+                                  resetNewPlaylistName={resetNewPlaylistName}
             />
         ) :
         (

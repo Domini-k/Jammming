@@ -26,8 +26,14 @@ class SpotifyService {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-
-            return await response.json();
+            // Check if the response has content
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+                return await response.json();
+            } else {
+                // No content to parse
+                return null;
+            }
         } catch (error) {
             console.error('API request failed:', error);
             throw error;
@@ -93,6 +99,9 @@ class SpotifyService {
     }
 
     // Update playlist details
+    // PlaylistID to be updated
+    // name to which this playlist's name should be changed
+    // same for desc.
     async updatePlaylistDetails(playlistId, name, description = '') {
         return await this.makeRequest(
             `/playlists/${playlistId}`,

@@ -8,7 +8,8 @@ function UserAccountPlaylists({
                                   changeActivationStatusOfRenameModal,
                                   playlistObjectToBeRenamed,
                                   passPlaylistToBeRenamedDetailsToModal,
-                                  newPlaylistName
+                                  newPlaylistName,
+                                  resetNewPlaylistName
                               }) {
     // Place for API call to get list of playlists from user profile
     const [listOfUserPlaylists, setListOfUserPlaylists] = useState();
@@ -18,10 +19,10 @@ function UserAccountPlaylists({
 
     useEffect(() => {
         const getPlaylists = async () => {
-            if (listOfUserPlaylists) {
-                return;
-            }
             try {
+                if (listOfUserPlaylists) {
+                    return;
+                }
                 setIsLoading(true);
                 setError(null);
                 // Call for list of current user's playlist
@@ -41,18 +42,56 @@ function UserAccountPlaylists({
         return () => clearTimeout(timeoutId);
     }, [listOfUserPlaylists])
 
+
+
+
     useEffect(() => {
         // RENAME THE PLAYLIST FUNCTIONALITY
         if (playlistObjectToBeRenamed && newPlaylistName && listOfUserPlaylists) {
-            let listOfUserPlaylistsAfterRenaming = listOfUserPlaylists.toSpliced(listOfUserPlaylists.length)
-            for (const playlistObject of listOfUserPlaylistsAfterRenaming) {
-                if ((playlistObject.id === playlistObjectToBeRenamed.id) && (playlistObject.uri === playlistObjectToBeRenamed.uri)) {
-                    playlistObject.name = newPlaylistName
+            const renamePlaylist = async () => {
+                if ((playlistObjectToBeRenamed.name===newPlaylistName)) {
+                    return;
                 }
-            }
-            setListOfUserPlaylists(listOfUserPlaylistsAfterRenaming)
+                try {
+                    setIsLoading(true);
+                    setError(null);
+                    // Call for list of current user's playlist
+                    // console.log("Old playlist name -> "+playlistObjectToBeRenamed.name);
+                    // console.log("New Playlist name -> "+newPlaylistName);
+                    await spotifyService.updatePlaylistDetails(playlistObjectToBeRenamed.id,newPlaylistName);
+                    // Update the local state to reflect the new playlist name
+                    setListOfUserPlaylists((prevPlaylists) =>
+                        prevPlaylists.map((playlist) =>
+                            playlist.id === playlistObjectToBeRenamed.id
+                                ? { ...playlist, name: newPlaylistName }
+                                : playlist
+                        )
+                    );
+                    resetNewPlaylistName(null);
+                    // setListOfUserPlaylists(null);
+                    // Delay the re-fetching to allow the API to update
+                    setTimeout(() => {
+                        setListOfUserPlaylists(null);
+                    }, 10000); // Re-fetch after 10 seconds
+
+                } catch (err) {
+                    setError('Failed to rename playlist. Please try again.');
+                    console.error('Renaming error:', err);
+                } finally {
+                    setIsLoading(false);
+                }
+            };
+            const timeoutId = setTimeout(() => {
+                renamePlaylist();
+            }, 300);
+
+            return () => clearTimeout(timeoutId);
         }
-    }, [playlistObjectToBeRenamed]);
+    }, [playlistObjectToBeRenamed,newPlaylistName ]);
+
+
+
+
 
     if (isLoading) {
         return <Loader/>

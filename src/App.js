@@ -13,7 +13,12 @@ import {spotifyAuth} from "./api/spotifyAuth";
 // TODO - Rename, App responsiveness
 // TODO - Creating playlist validation - Don't create when there is already one present with the same name
 // TODO - Better token management. It's authenticating automatically after it expires without any prompt / info
-
+/*
+* TODO - Renaming process needs to be handled better.
+*  It should perform the rename and then perform loading loop to wait for update on spotify side
+*  At any point of time user can stop the loading loop and rerender manually
+*
+* */
 function App() {
     const [musicSearchQuery, setMusicSearchQuery] = useState();
     const [trackAddedToPlaylist, setTrackAddedToPlaylist] = useState();
@@ -26,7 +31,7 @@ function App() {
     const [newPlaylistName, setNewPlaylistName] = useState();
     const [playlistToBeRenamedDetailsToModal, setPlaylistToBeRenamedDetailsToModal] = useState();
     const [clearSearchResultsStatus, setClearSearchResultsStatus] = useState(false);
-
+    
     function getTracksOnPlaylistFromPlaylistComponent(data) {
         setTracksOnUserPlaylist(data)
     }
@@ -192,6 +197,7 @@ function App() {
                                                   passPlaylistToBeRenamedDetailsToModal={passPlaylistToBeRenamedDetailsToModal}
                                                   newPlaylistName={newPlaylistName}
                                                   clearSearchResults={clearSearchResults}
+                                                  resetNewPlaylistName={setNewPlaylistName}
                                 />
                             </div>
                         </div>
